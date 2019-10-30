@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pl"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="expires" content="-1">
+<meta name="Description" content="Микроклональное размножение in-vitro голубика">
+<meta name="Keywords" content="Микроклональное размножение in-vitro голубика">
+<title>Микроклональное размножение</title>
+<link rel="shortcut icon" href="{% static 'images/plant.png' %}">
+<link rel="stylesheet" href="{% static 'css/rhodo.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/litebox.css' %}" type="text/css" media="screen">
+
+<meta name="google-site-verification" content="XfqOLvLf9XjuAFydJaXdMJik3MUhfIpEsRn2tnG4gV8">
+<style type="text/css">.backpack.dropzone {
+  font-family: 'SF UI Display', 'Segoe UI';
+  font-size: 15px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 250px;
+  height: 150px;
+  font-weight: lighter;
+  color: white;
+  will-change: right;
+  z-index: 2147483647;
+  bottom: 20%;
+  background: #333;
+  position: fixed;
+  user-select: none;
+  transition: left .5s, right .5s;
+  right: 0px; }
+  .backpack.dropzone .animation {
+    height: 80px;
+    width: 250px;
+    background: url("chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/assets/backpack/dropzone/hoverstate.png") left center; }
+  .backpack.dropzone .title::before {
+    content: 'Save to'; }
+  .backpack.dropzone.closed {
+    right: -250px; }
+  .backpack.dropzone.hover .animation {
+    animation: sxt-play-anim-hover 0.91s steps(21);
+    animation-fill-mode: forwards;
+    background: url("chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/assets/backpack/dropzone/hoverstate.png") left center; }
+
+@keyframes sxt-play-anim-hover {
+  from {
+    background-position: 0px; }
+  to {
+    background-position: -5250px; } }
+  .backpack.dropzone.saving .title::before {
+    content: 'Saving to'; }
+  .backpack.dropzone.saving .animation {
+    background: url("chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/assets/backpack/dropzone/saving_loop.png") left center;
+    animation: sxt-play-anim-saving steps(59) 2.46s infinite; }
+
+@keyframes sxt-play-anim-saving {
+  100% {
+    background-position: -14750px; } }
+  .backpack.dropzone.saved .title::before {
+    content: 'Saved to'; }
+  .backpack.dropzone.saved .animation {
+    background: url("chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/assets/backpack/dropzone/saved.png") left center;
+    animation: sxt-play-anim-saved steps(20) 0.83s forwards; }
+{% block auth %}
+@keyframes sxt-play-anim-saved {
+  100% {
+    background-position: -5000px; } }
+</style><script src="chrome-extension://mooikfkahbdckldjjndioackbalphokd/assets/prompt.js"></script></head>
+<body onload="pasekcookies();initLightbox()">
+  <div id="div0">
+    <div id="nagl0">
+      <a href="http://www.in-vitro.pl/" title="IN-VITRO T. Kusibab - O фирме">
+        <div class="baner"></div>
+      </a>
+    </div>
+    <div id="menu0">
+      <ul>
+        <li>
+          <a class="{% if request.resolver_match.url_name == 'home' %} aktyw {% endif %}" href="{% url 'home' %}" tabindex="1">In-vitro</a>
+        </li>
+        <li>
+          <a class="{% if request.resolver_match.url_name == 'goods' %} aktyw {% endif %}" href="{% url 'goods' %}?cat=" tabindex="2">Ассортимент</a>
+        </li>
+       <!-- <li>
+          <a class="" href="http://www.in-vitro.pl/dostepnosc.php?m0=9" tabindex="3">Доступность</a>
+        </li>
+        <li>
+          <a class="" href="http://www.in-vitro.pl/formularz.php?m0=5" tabindex="4">Заказы</a>
+        </li>
+        <li>
+          <a class="" href="http://www.in-vitro.pl/aktualnosci.php?m0=13" tabindex="5">Aктуальности</a>
+        </li>
+        <li>
+          <a class="" href="http://www.in-vitro.pl/info1.php?m0=4" tabindex="6">Полезные советы</a>
+        </li>
+        <li>
+          <a class="" href="http://www.in-vitro.pl/galeria.php?m0=12" tabindex="7">Фoтoгpaфии</a>
+        </li>-->
+        <li>
+          <a class="{% if request.resolver_match.url_name == 'contacts' %} aktyw {% endif %}" href="{% url 'contacts' %}" tabindex="8">Контакты</a>
+        </li>
+        <!--<li>
+          <a class="" href="http://www.in-vitro.pl/linki.php?m0=7" tabindex="9">Ссылки</a>
+        </li> -->
+        {% if user.is_authenticated %}
+        <!--<li>
+          <a class="" href="{% url 'goods' %}" tabindex="10">Кабинет</a>
+        </li>-->
+      {% endif %}
+    </ul>  
+
+
+   {% if user.is_authenticated %}
+     <li>User: {{ user.get_username }}</li>
+     <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>   
+   {% else %}
+     <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>   
+   {% endif %} 
+{% endblock %}
+<div id="szuk0"><form name="fszuk0" action="http://www.in-vitro.pl/oferta.php" method="post"> <input type="text" name="coszuk" size="50" length="60" value="" tabindex="1" checked="checked"><input class="klawszuk" type="submit" tabindex="1" name="szukpl" value="поиск">  </form></div></div>
+<div id="tresc0"><div id="lewa0">
+  {% block lewa %}
+  {% endblock %}
+
+</div> 
+    <div class="komunikat-plantacja">
+    <a href="{% url 'home' %}"><div><img src="{% static 'images/plant.png' %}" width="720"  height="50" alt=""></div></a>
+    </div>
+  <div id="prawa0">
+
+            {% block content %}
+            {% endblock %}
+
+
+</div>  <!--  koniec prawa0  -->

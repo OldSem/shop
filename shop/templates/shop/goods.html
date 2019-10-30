@@ -1,0 +1,55 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+       {% for good in goods %}
+         <div class="odm">
+           
+           {% with good.images.all|first as img %}
+            <img src="{{ img.image.url }}" width="100" height="100" >
+           {% endwith %}
+           
+           {{ good.title }}    
+           {{ good.description }}
+           {{ good.price }}
+
+            {{user}}<br>
+            {{good.user.all|first}}
+           {% if user.is_authenticated and user in good.user.all%}<a class="btn btn-default" href="{% url 'good_edit' nn=good.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>{% endif %} 
+           {% if user.is_authenticated and user in good.user.all%}<a class="btn btn-default" href="{% url 'good_delete' nn=good.pk %}"><span class="glyphicon glyphicon-remove"></span></a>{% endif %} 
+
+           <hr>
+         </div>  
+         {% endfor %}
+         {% if user.is_authenticated %} 
+         <form>
+            {% with 'good'  as good %}
+            <input type="button" value="Добавить" onClick='location.href={%url good%}'>
+
+            {% endwith %}
+         </form>
+         {% endif %} 
+
+
+       
+ 
+{% endblock %}
+
+{% block lewa %}
+  <div class="menubok">
+    <ul>
+
+        <li>
+            {% with categories.all|first as cat %}
+            <a href="{% url 'goods' %}?cat={{cat.parent.slug}}" >{{cat.parent.name}}</a>  
+             {% endwith %} 
+        <ul>
+        {% for category in categories %}
+            <li><a href="{% url 'goods' %}?cat={{category.slug}}" >{{category.name}}</a></li>
+
+        {% endfor %}
+
+        </ul>
+        </li>
+    </ul>
+  </div>
+{% endblock %}

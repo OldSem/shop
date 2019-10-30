@@ -1,0 +1,42 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+            <div>
+                {{ form.title.label_tag }}
+                {{ form.title }}
+            </div>
+            <div>
+                {{ form.description.label_tag }}
+                {{ form.description }}
+            </div>
+            <div>
+                {{ form.category.label_tag }}
+                {{ form.category }}
+                <a class="btn btn-default" href="{% url 'category_new' %}"><span class="glyphicon glyphicon-plus"></span></a>
+            </div>
+            <div>
+                {{ form.price.label_tag }}
+                {{ form.price }}
+            </div>
+            <div>
+                {{ form.id.label_tag }}
+                {{ form.id }}
+            </div>
+
+
+    <button type="submit">Upload</button>
+  </form>
+    {% for image in images %}
+            <div>
+                <img src="{{ image.image.url }}" width="42" height="42" >
+                
+                
+            </div>
+    {% endfor %}
+	
+		<a class="btn btn-default" href="{% url 'image_new' nn=nn %}"><span class="glyphicon glyphicon-plus"></span></a>
+
+  <p><a href="{% url 'home' %}">Return to home</a></p>
+{% endblock %}
