@@ -7,7 +7,7 @@ from .forms import ImageForm, GoodForm,CategoryForm
 from .models import Image,Category,Good
 
 #@login_required
-def category_new(request):
+def category(request):
     if request.method == "POST":
         form = CategoryForm(request.POST)
 
@@ -15,7 +15,7 @@ def category_new(request):
             cat = form.save(commit=False)
             cat.save()
             form.save_m2m()
-            return redirect('good')
+            return redirect('goods')
 
     else:
         form = CategoryForm()

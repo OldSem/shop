@@ -1,0 +1,9 @@
+git init	
+git config --global user.name "OldSem"
+git config --global user.email old_sem@meta.ua
+git config --global https.proxy https://iron-ln1.np.ua:3128
+git config --global http.sslVerify false
+git status
+git add --all .
+git commit -m "First commit"
+git push -u origin master

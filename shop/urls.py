@@ -4,7 +4,7 @@ from . import views
 urlpatterns = [
     url(r'^$', views.main, name='home'),
     url(r'^good_new/$', views.good, name='good'),
-    url(r'^category_new$', views.category_new, name='category_new'),
+    url(r'^category$', views.category, name='category'),
     url(r'^goods/$', views.goods, name='goods'),
     url(r'^image/(?P<nn>[0-9]+)/new/$', views.image_new, name='image_new'),
     url(r'^good/(?P<nn>[0-9]+)/edit/$', views.good_edit, name='good_edit'),

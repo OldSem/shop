@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.text import slugify
 from unidecode import unidecode
+from django.contrib.auth.models import Group
 
 class Category(models.Model):
     name = models.CharField(max_length=200)
