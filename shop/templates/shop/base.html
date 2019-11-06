@@ -69,11 +69,11 @@
 @keyframes sxt-play-anim-saved {
   100% {
     background-position: -5000px; } }
-</style><script src="chrome-extension://mooikfkahbdckldjjndioackbalphokd/assets/prompt.js"></script></head>
+</style></head>
 <body >
   <div id="div0">
     <div id="nagl0">
-      <a href="http://www.in-vitro.pl/" title="IN-VITRO T. Kusibab - O фирме">
+      <a href="{% url 'home' %}" title="About">
         <div class="baner"></div>
       </a>
     </div>
@@ -128,7 +128,7 @@
 
 </div> 
     <div class="komunikat-plantacja">
-    <a href="{% url 'home' %}"><div><img src="{% static 'images/plant.png' %}" width="720"  height="50" alt=""></div></a>
+    <a href="{% url 'home' %}"><div><img src="{% static 'images/plant2.png' %}" width="720"  height="100" alt=""></div></a>
     </div>
   <div id="prawa0">
 
@@ -137,3 +137,13 @@
 
 
 </div>  <!--  koniec prawa0  -->
+<div id="stopkatresc"><p>Последняя активность: 2019-11-06</p><a href="{% url 'home' %}">Вверх</a></div>
+</body >
+<script type="text/javascript">
+  window.addEventListener("load", function () {
+
+    tresc0.style.height=prawa0.offsetHeight+100;
+
+  });
+
+</script>

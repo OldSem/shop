@@ -23,6 +23,15 @@ body { margin-top: 0px;
 	border: none;	
 	font-family:Verdana,Arial,Helvetica,sans-serif ; /*Georgia,"Times New Roman",Times,serif*/
 	font-size: 12px;
+	-webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}
+*:before,
+*:after {
+  -webkit-box-sizing: content-box;
+     -moz-box-sizing: content-box;
+          box-sizing: content-box;
 }
 h1 {color:#683286;text-align:left;font-size:22px;font-family:Arial,Helvetica,sans-serif;margin-bottom:20px;text-shadow:0px 1px 2px #999;}
 h2 {color:#683286; font-size:18px;font-family:Arial,Helvetica,sans-serif;margin-bottom:20px;text-shadow:0px 1px 2px #999;}

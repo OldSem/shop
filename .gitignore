@@ -2,3 +2,5 @@
 *~
 __pycache__
 .DS_Store
+/invitro/settings.py
+/invitro/wsgi.py
