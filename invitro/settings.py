@@ -25,7 +25,8 @@ SECRET_KEY = '8@!&lk$i)^+&y^=lwdvh(zx3l7=2hdo8i4e6e2l5)!ld+idotm'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1',
+                 '176.104.52.92',]
 
 
 # Application definition
@@ -76,8 +77,12 @@ WSGI_APPLICATION = 'invitro.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'invitro',
+        'USER': 'taxiuser',
+        'PASSWORD': 'Nhbrjnf',
+        'HOST': 'etaxi.in.ua',
+        'PORT': '',
     }
 }
 
