@@ -122,22 +122,23 @@
    {% endif %} 
 {% endblock %}
 <div id="szuk0"><form name="fszuk0" action="http://www.in-vitro.pl/oferta.php" method="post"> <input type="text" name="coszuk" size="50" length="60" value="" tabindex="1" checked="checked"><input class="klawszuk" type="submit" tabindex="1" name="szukpl" value="поиск">  </form></div></div>
-<div id="tresc0"><div id="lewa0">
-  {% block lewa %}
-  {% endblock %}
+<div id="tresc0">
+  <div id="lewa0">
+    {% block lewa %}
+    {% endblock %}
 
-</div> 
-    <div class="komunikat-plantacja">
+  </div> 
+  <div class="komunikat-plantacja">
     <a href="{% url 'home' %}"><div><img src="{% static 'images/plant2.png' %}" width="720"  height="100" alt=""></div></a>
-    </div>
+  </div>
   <div id="prawa0">
 
             {% block content %}
             {% endblock %}
 
 
-</div>  <!--  koniec prawa0  -->
-<div id="stopkatresc"><p>Последняя активность: 2019-11-06</p><a href="{% url 'home' %}">Вверх</a></div>
+  </div>  <!--  koniec prawa0  -->
+  <div id="stopkatresc"><p>Последняя активность: 2019-11-06</p><a href="{% url 'home' %}">Вверх</a></div>
 </body >
 <script type="text/javascript">
   window.addEventListener("load", function () {
