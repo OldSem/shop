@@ -74,7 +74,7 @@ def goods(request):
 
     goods = Good.objects.filter(category__slug=cat)
     #images = Image.objects.all()
-    print(Category.objects.filter(slug=cat))
+    
     if len(Category.objects.filter(slug=cat))>0:
         if get_object_or_404(Category, slug=cat).parent != None:
 
