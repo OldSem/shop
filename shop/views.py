@@ -74,7 +74,7 @@ def goods(request):
 
     goods = Good.objects.filter(category__slug=cat)
     #images = Image.objects.all()
-    
+
     if len(Category.objects.filter(slug=cat))>0:
         if get_object_or_404(Category, slug=cat).parent != None:
 
@@ -102,6 +102,11 @@ def image_new(request,nn):
     return render(request, 'core/image_upload.html', {
         'form': form
     })
+
+def image_del(request,nn,pk):
+    image = get_object_or_404(Image, pk=pk)
+    image.delete()
+    return redirect('good_edit', nn=nn)
 
 # Create your views here.
 def main(request):

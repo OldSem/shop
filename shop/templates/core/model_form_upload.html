@@ -31,7 +31,7 @@
     {% for image in images %}
             <div>
                 <img src="{{ image.image.url }}" width="42" height="42" >
-                
+                <a class="btn btn-default" href="{% url 'image_del' nn=nn pk=image.pk%}"><span class="glyphicon glyphicon-remove"></span></a>
                 
             </div>
     {% endfor %}
