@@ -26,7 +26,8 @@ SECRET_KEY = '8@!&lk$i)^+&y^=lwdvh(zx3l7=2hdo8i4e6e2l5)!ld+idotm'
 DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1',
-                 '176.104.52.92',]
+                 '176.104.52.92',
+                 'vitro.in.ua']
 
 
 # Application definition

@@ -129,6 +129,30 @@ sup {font-size:9px;}
 		background-image:-webkit-linear-gradient(top,#fff,#e1e1e1);
 		background-image:linear-gradient(to top,#fff,#e1e1e1); }
 
+
+.goodimage{
+    width:100px;
+    height:100px;
+    
+
+    opacity: 1;
+    -webkit-transform: scale(1,1);
+    -webkit-transition-timing-function: ease-out;
+    -webkit-transition-duration: 550ms;
+    -moz-transform: scale(1,1);
+    -moz-transition-timing-function: ease-out;
+    -moz-transition-duration: 550ms;
+}
+.goodimage:hover {
+    -webkit-transform: scale(5,5);
+    -webkit-transition-timing-function: ease-out;
+    -webkit-transition-duration: 550ms;
+    -moz-transform: scale(1.2,1.2);
+    -moz-transition-timing-function: ease-out;
+    -moz-transition-duration: 550ms;
+}
+
+
 .jezyki {float:right;}
 .jezyki img {height:18px;margin:0px 0px;border:1px solid #fff;border-radius:6px;box-shadow:0px 1px 2px #aaa;}
 

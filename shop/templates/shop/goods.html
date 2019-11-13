@@ -5,7 +5,7 @@
          <div class="odm">
            
            {% with good.images.all|first as img %}
-            <img src="{{ img.image.url }}" width="100" height="100" >
+            <img class="goodimage" src="{{ img.image.url }}" width="100" height="100" >
            {% endwith %}
            
            {{ good.title }}    
