@@ -1,75 +1,88 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="pl"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-<meta http-equiv="pragma" content="no-cache">
-<meta http-equiv="expires" content="-1">
-<meta name="Description" content="Микроклональное размножение in-vitro голубика">
-<meta name="Keywords" content="Микроклональное размножение in-vitro голубика">
-<title>Микроклональное размножение</title>
-<link rel="shortcut icon" href="{% static 'images/plant.png' %}">
-<link rel="stylesheet" href="{% static 'css/rhodo.css' %}" type="text/css">
-<link rel="stylesheet" href="{% static 'css/litebox.css' %}" type="text/css" media="screen">
+<html lang="pl">
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-152534568-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-<meta name="google-site-verification" content="XfqOLvLf9XjuAFydJaXdMJik3MUhfIpEsRn2tnG4gV8">
-<style type="text/css">.backpack.dropzone {
-  font-family: 'SF UI Display', 'Segoe UI';
-  font-size: 15px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 250px;
-  height: 150px;
-  font-weight: lighter;
-  color: white;
-  will-change: right;
-  z-index: 2147483647;
-  bottom: 20%;
-  background: #333;
-  position: fixed;
-  user-select: none;
-  transition: left .5s, right .5s;
-  right: 0px; }
-  .backpack.dropzone .animation {
-    height: 80px;
+    gtag('config', 'UA-152534568-1');
+  </script>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="expires" content="-1">
+  <meta name="Description" content="Микроклональное размножение in-vitro голубика">
+  <meta name="Keywords" content="Микроклональное размножение in-vitro голубика">
+  <title>Микроклональное размножение</title>
+  <link rel="shortcut icon" href="{% static 'images/plant.png' %}">
+  <link rel="stylesheet" href="{% static 'css/rhodo.css' %}" type="text/css">
+  <link rel="stylesheet" href="{% static 'css/litebox.css' %}" type="text/css" media="screen">
+
+  <meta name="google-site-verification" content="XfqOLvLf9XjuAFydJaXdMJik3MUhfIpEsRn2tnG4gV8">
+  <style type="text/css">.backpack.dropzone {
+    font-family: 'SF UI Display', 'Segoe UI';
+    font-size: 15px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 250px;
-    background: url("chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/assets/backpack/dropzone/hoverstate.png") left center; }
-  .backpack.dropzone .title::before {
-    content: 'Save to'; }
-  .backpack.dropzone.closed {
-    right: -250px; }
-  .backpack.dropzone.hover .animation {
-    animation: sxt-play-anim-hover 0.91s steps(21);
-    animation-fill-mode: forwards;
-    background: url("chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/assets/backpack/dropzone/hoverstate.png") left center; }
+    height: 150px;
+    font-weight: lighter;
+    color: white;
+    will-change: right;
+    z-index: 2147483647;
+    bottom: 20%;
+    background: #333;
+    position: fixed;
+    user-select: none;
+    transition: left .5s, right .5s;
+    right: 0px; }
+    .backpack.dropzone .animation {
+      height: 80px;
+      width: 250px;
+      background: url("chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/assets/backpack/dropzone/hoverstate.png") left center; }
+    .backpack.dropzone .title::before {
+      content: 'Save to'; }
+    .backpack.dropzone.closed {
+      right: -250px; }
+    .backpack.dropzone.hover .animation {
+      animation: sxt-play-anim-hover 0.91s steps(21);
+      animation-fill-mode: forwards;
+      background: url("chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/assets/backpack/dropzone/hoverstate.png") left center; }
 
-@keyframes sxt-play-anim-hover {
-  from {
-    background-position: 0px; }
-  to {
-    background-position: -5250px; } }
-  .backpack.dropzone.saving .title::before {
-    content: 'Saving to'; }
-  .backpack.dropzone.saving .animation {
-    background: url("chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/assets/backpack/dropzone/saving_loop.png") left center;
-    animation: sxt-play-anim-saving steps(59) 2.46s infinite; }
+  @keyframes sxt-play-anim-hover {
+    from {
+      background-position: 0px; }
+    to {
+      background-position: -5250px; } }
+    .backpack.dropzone.saving .title::before {
+      content: 'Saving to'; }
+    .backpack.dropzone.saving .animation {
+      background: url("chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/assets/backpack/dropzone/saving_loop.png") left center;
+      animation: sxt-play-anim-saving steps(59) 2.46s infinite; }
 
-@keyframes sxt-play-anim-saving {
-  100% {
-    background-position: -14750px; } }
-  .backpack.dropzone.saved .title::before {
-    content: 'Saved to'; }
-  .backpack.dropzone.saved .animation {
-    background: url("chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/assets/backpack/dropzone/saved.png") left center;
-    animation: sxt-play-anim-saved steps(20) 0.83s forwards; }
-{% block auth %}
-@keyframes sxt-play-anim-saved {
-  100% {
-    background-position: -5000px; } }
-</style></head>
+  @keyframes sxt-play-anim-saving {
+    100% {
+      background-position: -14750px; } }
+    .backpack.dropzone.saved .title::before {
+      content: 'Saved to'; }
+    .backpack.dropzone.saved .animation {
+      background: url("chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/assets/backpack/dropzone/saved.png") left center;
+      animation: sxt-play-anim-saved steps(20) 0.83s forwards; }
+  {% block auth %}
+  @keyframes sxt-play-anim-saved {
+    100% {
+      background-position: -5000px; } }
+  </style>
+</head>
 <body >
   <div id="div0">
     <div id="nagl0">
