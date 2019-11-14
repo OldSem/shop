@@ -4,3 +4,6 @@ __pycache__
 .DS_Store
 /invitro/settings.py
 /invitro/wsgi.py
+invitro_nginx.conf
+invitro_uwsgi.ini
+uwsgi_params

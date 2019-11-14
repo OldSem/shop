@@ -23,3 +23,7 @@ class CategoryForm(forms.ModelForm):
         fields = ('name', 'parent',)
         labels = {'name': 'Название', 'parent': 'Надкатегория',}
         values = {"save": 'Добавить'}
+
+class QuantityForm(forms.Form):
+    quantity = forms.IntegerField()
+    

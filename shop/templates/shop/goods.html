@@ -12,7 +12,15 @@
            {{ good.description }}
            {{ good.price }}
 
-            {{user}}<br>
+            
+            {{user}}
+            <div>
+                <form method="POST" class="post-form" autocomplete="off">{% csrf_token %}
+                {{form.quantity}}
+                <button type="submit" class="save btn btn-default">Купить</button>
+                </form>
+            </div>
+            <br>
             {{good.user.all|first}}
            {% if user.is_authenticated and user in good.user.all%}<a class="btn btn-default" href="{% url 'good_edit' nn=good.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>{% endif %} 
            {% if user.is_authenticated and user in good.user.all%}<a class="btn btn-default" href="{% url 'good_delete' nn=good.pk %}"><span class="glyphicon glyphicon-remove"></span></a>{% endif %} 

@@ -85,26 +85,27 @@
         <li>
           <a class="{% if request.resolver_match.url_name == 'goods' %} aktyw {% endif %}" href="{% url 'goods' %}?cat=" tabindex="2">Ассортимент</a>
         </li>
-       <!-- <li>
-          <a class="" href="http://www.in-vitro.pl/dostepnosc.php?m0=9" tabindex="3">Доступность</a>
+
+       <!--  <li>
+          <a class="" href="{% url 'home' %}" tabindex="4">Заказы</a>
         </li>
         <li>
-          <a class="" href="http://www.in-vitro.pl/formularz.php?m0=5" tabindex="4">Заказы</a>
+          <a class="" href="{% url 'home' %}" tabindex="5">Aктуальности</a>
         </li>
         <li>
-          <a class="" href="http://www.in-vitro.pl/aktualnosci.php?m0=13" tabindex="5">Aктуальности</a>
+          <a class="" href="{% url 'home' %}" tabindex="6">Полезные советы</a>
         </li>
         <li>
-          <a class="" href="http://www.in-vitro.pl/info1.php?m0=4" tabindex="6">Полезные советы</a>
-        </li>
-        <li>
-          <a class="" href="http://www.in-vitro.pl/galeria.php?m0=12" tabindex="7">Фoтoгpaфии</a>
+          <a class="" href="{% url 'home' %}" tabindex="7">Фoтoгpaфии</a>
         </li>-->
         <li>
-          <a class="{% if request.resolver_match.url_name == 'contacts' %} aktyw {% endif %}" href="{% url 'contacts' %}" tabindex="8">Контакты</a>
+          <a class="{% if request.resolver_match.url_name == 'contacts' %} aktyw {% endif %}" href="{% url 'contacts' %}" tabindex="7">Контакты</a>
+        </li>
+        <li>
+          <a class="{% if request.resolver_match.url_name == 'contacts' %} aktyw {% endif %}" href="{% url 'home' %}" tabindex="8">Форум</a>
         </li>
         <!--<li>
-          <a class="" href="http://www.in-vitro.pl/linki.php?m0=7" tabindex="9">Ссылки</a>
+          <a class="" href="{% url 'home' %}" tabindex="9">Ссылки</a>
         </li> -->
         {% if user.is_authenticated %}
         <!--<li>

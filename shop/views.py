@@ -3,7 +3,7 @@ from django.forms import modelformset_factory
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import HttpResponseRedirect
-from .forms import ImageForm, GoodForm,CategoryForm
+from .forms import ImageForm, GoodForm,CategoryForm,QuantityForm
 from .models import Image,Category,Good
 
 #@login_required
@@ -71,7 +71,7 @@ def good_edit(request, nn):
 
 def goods(request):
     cat = request.GET.get('cat')
-
+    form = QuantityForm(initial={'quantity':1})
     goods = Good.objects.filter(category__slug=cat)
     #images = Image.objects.all()
 
@@ -84,7 +84,8 @@ def goods(request):
         #categories = Category.objects.all()
     else:
         categories = Category.objects.filter(parent=None)
-    return render(request, 'shop/goods.html', {'goods': goods,'categories':categories})
+    print (form)
+    return render(request, 'shop/goods.html', {'goods': goods,'categories':categories,'form':form})
 
 
 def image_new(request,nn):
