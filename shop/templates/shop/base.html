@@ -115,7 +115,7 @@
           <a class="{% if request.resolver_match.url_name == 'contacts' %} aktyw {% endif %}" href="{% url 'contacts' %}" tabindex="7">Контакты</a>
         </li>
         <li>
-          <a class="{% if request.resolver_match.url_name == 'contacts' %} aktyw {% endif %}" href="posts" tabindex="8">Форум</a>
+          <a class="{% if request.resolver_match.url_name == 'posts' %} aktyw {% endif %}" href="{% url 'posts' %}" tabindex="8">Форум</a>
         </li>
         <!--<li>
           <a class="" href="{% url 'home' %}" tabindex="9">Ссылки</a>
