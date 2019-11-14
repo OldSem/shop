@@ -1,5 +1,5 @@
 from django import forms
-from .models import Good, Image,Category
+from .models import Good, Image,Category,Post
 
 class GoodForm(forms.ModelForm):
     title = forms.CharField(max_length=128)
@@ -26,4 +26,11 @@ class CategoryForm(forms.ModelForm):
 
 class QuantityForm(forms.Form):
     quantity = forms.IntegerField()
-    
+
+class PostForm(forms.ModelForm):
+    user = forms.CharField(label='Автор')
+    class Meta:
+        model = Post
+        fields = ('post','user')
+        labels = {'post': 'ИМХО'}
+        values = {"save": 'Добавить'}

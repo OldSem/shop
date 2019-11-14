@@ -3,8 +3,8 @@ from django.forms import modelformset_factory
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import HttpResponseRedirect
-from .forms import ImageForm, GoodForm,CategoryForm,QuantityForm
-from .models import Image,Category,Good
+from .forms import ImageForm, GoodForm,CategoryForm,QuantityForm,PostForm
+from .models import Image,Category,Good,Post
 
 #@login_required
 def category(request):
@@ -84,7 +84,7 @@ def goods(request):
         #categories = Category.objects.all()
     else:
         categories = Category.objects.filter(parent=None)
-    print (form)
+
     return render(request, 'shop/goods.html', {'goods': goods,'categories':categories,'form':form})
 
 
@@ -115,3 +115,22 @@ def main(request):
 
 def contacts(request):
     return render(request,'shop/contacts.html')
+
+def posts(request):
+    posts=Post.objects.all()
+    user = request.user
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect('posts')
+    else:
+        form = PostForm()
+        form.fields["user"].initial = user
+    return render(request,'shop/posts.html',{'form':form,'posts':posts})
+
+def post_delete(request, nn):
+    post = get_object_or_404(Post, pk=nn)
+    post.delete()
+    return redirect('posts')

@@ -1,3 +1,5 @@
+
+
 """
 Django settings for invitro project.
 
@@ -32,6 +34,7 @@ ALLOWED_HOSTS = ['127.0.0.1',
 
 # Application definition
 
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -39,7 +42,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'shop'
+    'django.contrib.sites',
+    'photologue',
+    'tinymce',
+    'shop',
+    'django_forum_app',    
 ]
 
 MIDDLEWARE = [
@@ -78,12 +85,8 @@ WSGI_APPLICATION = 'invitro.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'invitro',
-        'USER': 'taxiuser',
-        'PASSWORD': 'Nhbrjnf',
-        'HOST': 'etaxi.in.ua',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -133,3 +136,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+SITE_ID = 1
+

@@ -22,6 +22,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
+    url(r'^forum/', include('django_forum_app.urls')),
     path('admin/', admin.site.urls),
     path('', include('shop.urls')),
     url(r'^signup/$', core_views.signup, name='signup'),

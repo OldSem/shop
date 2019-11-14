@@ -1,0 +1,73 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+       {% for post in posts %}
+         <div class="odm">
+           
+        
+           {{ post.user }}    
+           {{ post.post }}
+          
+
+            
+            
+
+            <br>
+            
+           
+           {% if user.is_superuser == True %}<a class="btn btn-default" href="{% url 'post_delete' nn=post.pk %}"><span class="glyphicon glyphicon-remove"></span></a>{% endif %} 
+
+           <hr>
+         </div> 
+ 
+         {% endfor %}
+          <div>
+                <form method="POST" class="post-form" autocomplete="off">{% csrf_token %}
+                {{form}}
+                <button type="submit" class="save btn btn-default">Ответить</button>
+                </form>
+          </div> 
+
+
+
+       
+ 
+{% endblock %}
+
+{% block lewa %}
+  <div class="menubok">
+    <ul>
+
+        <li>
+            {% with categories.all|first as cat %}
+            <a href="{% url 'goods' %}?cat={{cat.parent.slug}}" >{{cat.parent.name}}</a>  
+             {% endwith %} 
+        <ul>
+        {% for category in categories %}
+            <li><a href="{% url 'goods' %}?cat={{category.slug}}" >{{category.name}}</a></li>
+
+        {% endfor %}
+
+        </ul>
+        </li>
+        <li>
+
+           
+            {%for group in user.groups.all%}
+                {%if group.name == 'admin'%}
+                    
+            
+               <a class="btn btn-default" href="{% url 'category' %}"><span class="glyphicon glyphicon-plus"></span></a>
+                
+                {%endif%}
+            {%endfor%}
+                
+            
+           
+            
+        </li>
+            
+    </ul>
+
+  </div>
+{% endblock %}

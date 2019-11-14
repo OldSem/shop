@@ -56,5 +56,8 @@ class Image (models.Model):
     image = models.ImageField(upload_to='shop/%Y/%m/%d',
                               verbose_name='Image')
 
+class Post(models.Model):
+    user = models.CharField(max_length=20)
+    post = models.TextField()
 
 # Create your models here.
