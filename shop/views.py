@@ -3,8 +3,9 @@ from django.forms import modelformset_factory
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import HttpResponseRedirect
-from .forms import ImageForm, GoodForm,CategoryForm,QuantityForm,PostForm
-from .models import Image,Category,Good,Post
+from .forms import ImageForm, GoodForm,CategoryForm,QuantityForm,PostForm,TheoryForm
+from .models import Image,Category,Good,Post,Theory
+from django.template import Context, Template
 
 #@login_required
 def category(request):
@@ -115,6 +116,76 @@ def main(request):
 
 def contacts(request):
     return render(request,'shop/contacts.html')
+
+
+def tree(a, menu, theme):
+
+    menu = menu + '<ul>'
+
+    for i in a:
+
+        menu = menu + '<li>'
+        menu = menu +'<a href="{% url \''+theme+'\' %}?cat='+i.slug+'" >'+i.name+'</a>'
+        if i.children.count()>0:
+            print (i.children)
+            menu = tree(i.children.all(), menu,theme)
+
+        menu = menu + '</li>'
+    menu = menu + '</ul>'
+    return menu
+
+
+def theory(request):
+    theme = request.GET.get('cat')
+    themes = Theory.objects.filter(parent=None)
+
+
+    menu = Template(tree(themes,'','theory')).render(Context())
+    if theme!='':
+        theme = get_object_or_404(Theory, slug=theme)
+
+        theme=Template(theme.text).render(Context())
+
+
+
+    return render(request, 'shop/theory.html', {'theory': theme,'menu':menu})
+
+def theory_new(request):
+    if request.method == 'POST':
+        form = TheoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/theory/?cat=')
+    else:
+        form = TheoryForm()
+    return render(request, 'core/theoryform.html', {
+        'form': form
+    })
+
+def theory_edit(request, slug):
+    theme = get_object_or_404(Theory, slug=slug)
+    if request.method == "POST":
+        form = TheoryForm(request.POST, instance=theme)
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.save()
+            return redirect('/theory/?cat='+slug)
+
+    else:
+        form = TheoryForm(instance=theme)
+
+
+    return render(request, 'core/theoryform.html', {'form': form})
+
+def theory_delete(request, slug):
+    theme = get_object_or_404(Theory, slug=slug)
+    theme.delete()
+
+
+    return redirect('/theory/?cat=')
+
+
+
 
 def posts(request):
     posts=Post.objects.all()

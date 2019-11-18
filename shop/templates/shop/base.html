@@ -98,10 +98,11 @@
         <li>
           <a class="{% if request.resolver_match.url_name == 'goods' %} aktyw {% endif %}" href="{% url 'goods' %}?cat=" tabindex="2">Ассортимент</a>
         </li>
-
-       <!--  <li>
-          <a class="" href="{% url 'home' %}" tabindex="4">Заказы</a>
+        <li>
+     
+          <a class="{% if request.resolver_match.url_name == 'theory' %} aktyw {% endif %}"  href="{% url 'theory' %}?cat=" tabindex="4">Теория</a>
         </li>
+          <!--  
         <li>
           <a class="" href="{% url 'home' %}" tabindex="5">Aктуальности</a>
         </li>

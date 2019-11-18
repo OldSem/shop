@@ -56,6 +56,35 @@ class Image (models.Model):
     image = models.ImageField(upload_to='shop/%Y/%m/%d',
                               verbose_name='Image')
 
+
+class Theory(models.Model):
+    name = models.CharField(max_length=200)
+    slug = models.SlugField()
+    parent = models.ForeignKey('self', blank=True, null=True, related_name='children',on_delete=models.PROTECT)
+    text = models.TextField()
+
+    class Meta:
+        # enforcing that there can not be two categories under a parent with same slug
+
+        # __str__ method elaborated later in post.  use __unicode__ in place of
+
+        # __str__ if you are using python 2
+
+        unique_together = ('slug', 'parent',)
+        verbose_name_plural = "theory"
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(unidecode(self.name))
+        super(Theory, self).save(*args, **kwargs)
+
+    def __str__(self):
+        full_path = [self.name]
+        k = self.parent
+        while k is not None:
+            full_path.append(k.name)
+            k = k.parent
+        return ' -> '.join(full_path[::-1])
+
 class Post(models.Model):
     user = models.CharField(max_length=20)
     post = models.TextField()
