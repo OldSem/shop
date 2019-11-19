@@ -127,7 +127,6 @@ def tree(a, menu, theme):
         menu = menu + '<li>'
         menu = menu +'<a href="{% url \''+theme+'\' %}?cat='+i.slug+'" >'+i.name+'</a>'
         if i.children.count()>0:
-            print (i.children)
             menu = tree(i.children.all(), menu,theme)
 
         menu = menu + '</li>'
@@ -138,15 +137,10 @@ def tree(a, menu, theme):
 def theory(request):
     theme = request.GET.get('cat')
     themes = Theory.objects.filter(parent=None)
-
-
     menu = Template(tree(themes,'','theory')).render(Context())
-    if theme!='':
+    if theme!='' and theme!=None:
         theme = get_object_or_404(Theory, slug=theme)
-
         theme=Template(theme.text).render(Context())
-
-
 
     return render(request, 'shop/theory.html', {'theory': theme,'menu':menu})
 

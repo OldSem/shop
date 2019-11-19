@@ -3,19 +3,19 @@
 {% block content %}
 
 
-
-  {{theory}}
-                  {%for group in user.groups.all%}
-                {%if group.name == 'admin'%}
-                    
-            {%if request.GET.cat != ''%}
-            <a class="btn btn-default" href="{% url 'theory_edit' slug=request.GET.cat %}"><span class="glyphicon glyphicon-pencil"></span></a>
-            <a class="btn btn-default" href="{% url 'theory_delete' slug=request.GET.cat %}"><span class="glyphicon glyphicon-remove"></span></a>
-                {%endif%}
+    {%if request.GET.cat != '' and request.GET.cat != None%}
+            {{theory}}
+            {%for group in user.groups.all%}
+              {%if group.name == 'admin'%}
+                        
                 
+                <a class="btn btn-default" href="{% url 'theory_edit' slug=request.GET.cat %}"><span class="glyphicon glyphicon-pencil"></span></a>
+                <a class="btn btn-default" href="{% url 'theory_delete' slug=request.GET.cat %}"><span class="glyphicon glyphicon-remove"></span></a>
                 {%endif%}
+                    
+                
             {%endfor%}
-    
+    {%endif%}   
 {% endblock %}
 
 {% block lewa %}
