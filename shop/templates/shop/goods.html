@@ -35,7 +35,7 @@
             <div>
                 <form method="POST" class="post-form" autocomplete="off">{% csrf_token %}
                     {{form.quantity}}
-                    <input type="hidden" name="good" value="{{good.title}}" /> 
+                    <input type="hidden" name="good" value="{{good.pk}}" /> 
                 <button type="submit" class="save btn btn-default">Купить</button>
                 </form>
             </div>

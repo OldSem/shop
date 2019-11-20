@@ -67,13 +67,13 @@ class Image (models.Model):
 
 
 class Order(models.Model):
-    user = models.CharField(max_length=50)
-    phone = models.CharField(max_length=15)
-    city = models.CharField(max_length=50)
-    street = models.CharField(max_length=50)
-    build = models.CharField(max_length=15)
-    aptmt = models.CharField(max_length=15)
-    payment = models.IntegerField()
+    user = models.CharField(max_length=50, default=None,null=True)
+    phone = models.CharField(max_length=15, default=None,null=True)
+    city = models.CharField(max_length=50, default=None,null=True)
+    street = models.CharField(max_length=50, default=None,null=True)
+    build = models.CharField(max_length=15, default=None,null=True)
+    aptmt = models.CharField(max_length=15, default=None,null=True)
+    payment = models.IntegerField( default=None,null=True)
 
 class Basket(models.Model):
     order = models.ForeignKey(Order,on_delete=models.CASCADE)

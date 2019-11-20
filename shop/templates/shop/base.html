@@ -102,22 +102,19 @@
      
           <a class="{% if request.resolver_match.url_name == 'theory' %} aktyw {% endif %}"  href="{% url 'theory' %}?cat=" tabindex="4">Теория</a>
         </li>
-          <!--  
+
         <li>
-          <a class="" href="{% url 'home' %}" tabindex="5">Aктуальности</a>
+          <a class="{% if request.resolver_match.url_name == 'contacts' %} aktyw {% endif %}" href="{% url 'contacts' %}" tabindex="5">Контакты</a>
         </li>
         <li>
-          <a class="" href="{% url 'home' %}" tabindex="6">Полезные советы</a>
+          <a class="{% if request.resolver_match.url_name == 'posts' %} aktyw {% endif %}" href="{% url 'posts' %}" tabindex="6">Форум</a>
         </li>
         <li>
-          <a class="" href="{% url 'home' %}" tabindex="7">Фoтoгpaфии</a>
-        </li>-->
-        <li>
-          <a class="{% if request.resolver_match.url_name == 'contacts' %} aktyw {% endif %}" href="{% url 'contacts' %}" tabindex="7">Контакты</a>
+          <a class="{% if request.resolver_match.url_name == 'basket' %} aktyw {% endif %}" href="{% url 'basket' %}" tabindex="7">Корзина</a>
         </li>
-        <li>
-          <a class="{% if request.resolver_match.url_name == 'posts' %} aktyw {% endif %}" href="{% url 'posts' %}" tabindex="8">Форум</a>
-        </li>
+
+
+
         <!--<li>
           <a class="" href="{% url 'home' %}" tabindex="9">Ссылки</a>
         </li> -->

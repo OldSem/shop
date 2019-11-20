@@ -19,6 +19,7 @@ urlpatterns = [
     url(r'^theory/(?P<slug>[-\w]+)/delete/$', views.theory_delete, name='theory_delete'),
     url(r'^theory/(?P<nn>[0-9]+)/adelete/$', views.theory_adelete, name='theory_adelete'),
     url(r'^category/(?P<nn>[0-9]+)/adelete/$', views.category_adelete, name='category_adelete'),
+    url(r'^basket$', views.basket, name='basket'),
     #url(r'^get.m3u8$', views.get_m3u8, name='get_m3u8'),
     #url(r'^video_feed$', views.video_feed, name='video_feed'),
     #url(r'^streams$', views.streams, name='streams'),

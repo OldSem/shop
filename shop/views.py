@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from .forms import ImageForm, GoodForm,CategoryForm,QuantityForm,PostForm,TheoryForm
-from .models import Image,Category,Good,Post,Theory
+from .models import Image,Category,Good,Post,Theory,Order,Basket
 from django.template import Context, Template
 
 
@@ -90,18 +90,34 @@ def good_edit(request, nn):
 
 
 def goods(request):
+    #request.session.flush()
     if request.method == "POST":
+
+
+        if request.session.get('order') is None:
+            order = Order()
+            order.save()
+            request.session['order']=order.pk
+
+        basket = Basket()
         print(request.POST.get('good'))
+        print(request.session.get('order'))
+        basket.good = Good.objects.get(pk=request.POST.get('good'))
+        basket.order = Order.objects.get(pk=request.session['order'])
+        basket.quantity = request.POST.get('quantity')
+        basket.save()
+
+
     cat = request.GET.get('cat')
     form = QuantityForm(initial={'quantity':1})
     goods = Good.objects.filter(category__slug=cat)
     #images = Image.objects.all()
     categories=Category.objects.filter(parent=None)
     categories = Template(tree(request,categories, '', 'goods')).render(Context())
-    request.session['order']=0
 
 
-    print (categories)
+
+
     return render(request, 'shop/goods.html', {'goods': goods,'categories':categories,'form':form})
 
 
@@ -132,6 +148,19 @@ def main(request):
 
 def contacts(request):
     return render(request,'shop/contacts.html')
+
+def basket(request):
+    goods = Basket.objects.filter(order__pk=request.session['order'])
+
+    return render(request, 'shop/basket.html', {'goods': goods})
+
+
+
+
+
+
+
+
 
 
 

@@ -1,0 +1,33 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+       {%{{sum}} = 0%}
+       {% for good in goods %}
+         <div class="odm">
+            {% with good.good.images.all|first as img %}
+            <img src="{{ img.image.url }}" width="50" height="50" >
+           {% endwith %}
+            
+            {{good.good.title}} 
+            {{good.good.price}} грн.
+            {{good.quantity}} шт.
+            {%{{sum}} = {{sum}}+{{good.good.price}}*{{good.quantity}}%}
+          
+           <a class="btn btn-default" href="{% url 'good_delete' nn=good.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+           <hr>
+         </div>  
+         {% endfor %}
+         Всего  {{sum}}
+
+
+
+       
+ 
+{% endblock %}
+
+{% block lewa %}
+  <div class="menubok">
+
+
+  </div>
+{% endblock %}
