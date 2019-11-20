@@ -3,25 +3,44 @@
 {% block content %}
        {% for good in goods %}
          <div class="odm">
-           
+           <table style="margin-left:10px;" width="100%">
+            <tr >
+             <td align ="left" width= "10%">
            {% with good.images.all|first as img %}
             <img class="goodimage" src="{{ img.image.url }}" width="100" height="100" >
            {% endwith %}
-           
-           {{ good.title }}    
-           {{ good.description }}
-           {{ good.price }}
-
-            
-            {{user}}
+           </td>
+           <td align ="left">
+            <table width= "90%">
+               <tr>
+               <td>                
+                    <strong>{{ good.title }}</strong>  
+                 </td>  
+                </tr>              
+                <tr>
+                <td>
+                 {{ good.description }}
+                 </td>
+                </tr>
+               <tr>
+               <td>
+                
+               {{ good.price }} грн.
+               </td>
+                </tr>
+               </td>
+            </tr>
+            </table>
+          </table>  
             <div>
                 <form method="POST" class="post-form" autocomplete="off">{% csrf_token %}
-                {{form.quantity}}
+                    {{form.quantity}}
+                    <input type="hidden" name="good" value="{{good.title}}" /> 
                 <button type="submit" class="save btn btn-default">Купить</button>
                 </form>
             </div>
             <br>
-            {{good.user.all|first}}
+            
            {% if user.is_authenticated and user in good.user.all%}<a class="btn btn-default" href="{% url 'good_edit' nn=good.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>{% endif %} 
            {% if user.is_authenticated and user in good.user.all%}<a class="btn btn-default" href="{% url 'good_delete' nn=good.pk %}"><span class="glyphicon glyphicon-remove"></span></a>{% endif %} 
 
@@ -47,17 +66,8 @@
     <ul>
 
         <li>
-            {% with categories.all|first as cat %}
-            <a href="{% url 'goods' %}?cat={{cat.parent.slug}}" >{{cat.parent.name}}</a>  
-             {% endwith %} 
-        <ul>
-        {% for category in categories %}
-            <li><a href="{% url 'goods' %}?cat={{category.slug}}" >{{category.name}}</a></li>
+            {{categories}}
 
-        {% endfor %}
-
-        </ul>
-        </li>
         <li>
 
            

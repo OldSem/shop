@@ -14,7 +14,7 @@ body { margin-top: 0px;
 		background:  #a2c379 url(http://www.gotk.home.pl/in-vitro/in-vitro/images/marek9.png) no-repeat center 0px;
 */
 body { margin-top: 0px;
-		background:  #a2c379  url(/images/marek9.png) no-repeat center 0px; 
+		background:  #a2c379  no-repeat center 0px; 
 
 		} /* 2a4846      */
 * {

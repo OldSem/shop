@@ -7,6 +7,25 @@ from .forms import ImageForm, GoodForm,CategoryForm,QuantityForm,PostForm,Theory
 from .models import Image,Category,Good,Post,Theory
 from django.template import Context, Template
 
+
+
+def tree(request,a, menu, theme):
+
+    menu = menu + '<ul>'
+
+    for i in a:
+
+        menu = menu + '<li>'
+        menu = menu +'<a href="{% url \''+theme+'\' %}?cat='+i.slug+'" >'+i.name+'</a>'
+
+        if i.children.count()>0:
+            menu = tree(request,i.children.all(), menu,theme)
+
+        menu = menu + '</li>'
+    menu = menu + '</ul>'
+    return menu
+
+
 #@login_required
 def category(request):
     if request.method == "POST":
@@ -71,21 +90,18 @@ def good_edit(request, nn):
 
 
 def goods(request):
+    if request.method == "POST":
+        print(request.POST.get('good'))
     cat = request.GET.get('cat')
     form = QuantityForm(initial={'quantity':1})
     goods = Good.objects.filter(category__slug=cat)
     #images = Image.objects.all()
+    categories=Category.objects.filter(parent=None)
+    categories = Template(tree(request,categories, '', 'goods')).render(Context())
+    request.session['order']=0
 
-    if len(Category.objects.filter(slug=cat))>0:
-        if get_object_or_404(Category, slug=cat).parent != None:
 
-            categories = Category.objects.filter(slug=get_object_or_404(Category, slug=cat).parent.slug)[0].children.all()
-        else:
-            categories = Category.objects.filter(parent__slug=cat)
-        #categories = Category.objects.all()
-    else:
-        categories = Category.objects.filter(parent=None)
-
+    print (categories)
     return render(request, 'shop/goods.html', {'goods': goods,'categories':categories,'form':form})
 
 
@@ -118,26 +134,13 @@ def contacts(request):
     return render(request,'shop/contacts.html')
 
 
-def tree(a, menu, theme):
 
-    menu = menu + '<ul>'
-
-    for i in a:
-
-        menu = menu + '<li>'
-        menu = menu +'<a href="{% url \''+theme+'\' %}?cat='+i.slug+'" >'+i.name+'</a>'
-        if i.children.count()>0:
-            menu = tree(i.children.all(), menu,theme)
-
-        menu = menu + '</li>'
-    menu = menu + '</ul>'
-    return menu
 
 
 def theory(request):
     theme = request.GET.get('cat')
     themes = Theory.objects.filter(parent=None)
-    menu = Template(tree(themes,'','theory')).render(Context())
+    menu = Template(tree(request,themes,'','theory')).render(Context())
     if theme!='' and theme!=None:
         theme = get_object_or_404(Theory, slug=theme)
         theme=Template(theme.text).render(Context())
@@ -149,7 +152,7 @@ def theory_new(request):
         form = TheoryForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/theory/?cat=')
+            return redirect('theory')
     else:
         form = TheoryForm()
     return render(request, 'core/theoryform.html', {
@@ -177,6 +180,20 @@ def theory_delete(request, slug):
 
 
     return redirect('/theory/?cat=')
+
+def theory_adelete(request, nn):
+    theme = get_object_or_404(Theory, pk=nn)
+    theme.delete()
+
+
+    return redirect('/theory/?cat=')
+
+def category_adelete(request, nn):
+    theme = get_object_or_404(Category, pk=nn)
+    theme.delete()
+
+
+    return redirect('/goods')
 
 
 

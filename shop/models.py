@@ -19,8 +19,17 @@ class Category(models.Model):
         unique_together = ('slug', 'parent',)
         verbose_name_plural = "categories"
 
+
+
     def save(self, *args, **kwargs):
-        self.slug = slugify(unidecode(self.name))
+        if not self.slug:
+            slug = slugify(unidecode(self.name))
+            while True:
+                if Category.objects.filter(slug=slug).count()>0:
+                    slug = slug + '-'
+                else:
+                    self.slug = slug
+                    break
         super(Category, self).save(*args, **kwargs)
 
     def __str__(self):
@@ -57,6 +66,23 @@ class Image (models.Model):
                               verbose_name='Image')
 
 
+class Order(models.Model):
+    user = models.CharField(max_length=50)
+    phone = models.CharField(max_length=15)
+    city = models.CharField(max_length=50)
+    street = models.CharField(max_length=50)
+    build = models.CharField(max_length=15)
+    aptmt = models.CharField(max_length=15)
+    payment = models.IntegerField()
+
+class Basket(models.Model):
+    order = models.ForeignKey(Order,on_delete=models.CASCADE)
+    good = models.ForeignKey(Good,on_delete=models.CASCADE)
+    quantity = models.IntegerField()
+
+
+
+
 class Theory(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField()
@@ -74,7 +100,14 @@ class Theory(models.Model):
         verbose_name_plural = "theory"
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(unidecode(self.name))
+        if not self.slug:
+            slug = slugify(unidecode(self.name))
+            while True:
+                if Theory.objects.filter(slug=slug).count()>0:
+                    slug = slug + '-'
+                else:
+                    self.slug = slug
+                    break
         super(Theory, self).save(*args, **kwargs)
 
     def __str__(self):
@@ -84,6 +117,8 @@ class Theory(models.Model):
             full_path.append(k.name)
             k = k.parent
         return ' -> '.join(full_path[::-1])
+
+
 
 class Post(models.Model):
     user = models.CharField(max_length=20)
