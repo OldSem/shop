@@ -3,7 +3,7 @@ from django.forms import modelformset_factory
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import HttpResponseRedirect
-from .forms import ImageForm, GoodForm,CategoryForm,QuantityForm,PostForm,TheoryForm
+from .forms import ImageForm, GoodForm,CategoryForm,QuantityForm,PostForm,TheoryForm,OrderForm
 from .models import Image,Category,Good,Post,Theory,Order,Basket
 from django.template import Context, Template
 from django.db.models import Sum,F,FloatField
@@ -152,13 +152,25 @@ def contacts(request):
     return render(request,'shop/contacts.html')
 
 def basket(request):
-    print(request.session.keys())
+
+    if request.method == 'POST':
+        del request.session['order']
+        request.session.modified = True
+        form=OrderForm(request.POST)
+        if form.is_valid():
+            order = form.save(commit=False)
+            order.status = 'ordered'
+            order.save()
+            return redirect('goods')
+
     if 'order' in request.session.keys():
+        order = get_object_or_404(Order, pk=request.session['order'])
         goods = Basket.objects.filter(order__pk=request.session['order'])
+        form = OrderForm()
     else:
         goods = []
 
-    return render(request, 'shop/basket.html', {'goods': goods})
+    return render(request, 'shop/basket.html', {'goods': goods,'form':form})
 
 def basket_delete(request,nn):
     good = get_object_or_404(Basket, pk=nn)
@@ -166,6 +178,9 @@ def basket_delete(request,nn):
     return redirect('basket')
 
 
+def orders(request):
+    orders = Order.objects.all()
+    return render(request, 'shop/orders.html', {'orders': orders})
 
 
 

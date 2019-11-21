@@ -47,7 +47,14 @@
 
 {% block lewa %}
   <div class="menubok">
+ 
+    
+    {%if goods|length > 0 %}
 
-
+      <form method="POST" class="post-form" autocomplete="off">{% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class="save btn btn-default">Оформить заказ</button>
+      </form>
+    {%endif%}
   </div>
 {% endblock %}

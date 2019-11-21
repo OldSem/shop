@@ -112,8 +112,12 @@
         <li>
           <a class="{% if request.resolver_match.url_name == 'basket' %} aktyw {% endif %}" href="{% url 'basket' %}" tabindex="7">Корзина</a>
         </li>
+        {% if user.is_authenticated %}
+        <li>
+          <a class="{% if request.resolver_match.url_name == 'orders' %} aktyw {% endif %}" href="{% url 'orders' %}" tabindex="7">Заказы</a>
+        </li>
 
-
+        {% endif %}
 
         <!--<li>
           <a class="" href="{% url 'home' %}" tabindex="9">Ссылки</a>

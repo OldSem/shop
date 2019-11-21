@@ -1,5 +1,5 @@
 from django import forms
-from .models import Good, Image,Category,Post,Theory
+from .models import Good, Image,Category,Post,Theory,Order
 
 class GoodForm(forms.ModelForm):
     title = forms.CharField(max_length=128)
@@ -26,6 +26,19 @@ class CategoryForm(forms.ModelForm):
 
 class QuantityForm(forms.Form):
     quantity = forms.IntegerField()
+
+
+
+class OrderForm(forms.ModelForm):
+    class Meta:
+        model = Order
+        fields = ('user', 'phone', 'city','street','build','aptmt','payment')
+        labels = {'user': 'Имя Фамилия', 'phone': 'Телефон', 'city': 'Населенный пункт', 'street': 'Улица','build': 'Дом','aptmt': 'Квартира','payment': 'Оплата'}
+        values = {"save": 'Оформить заказ'}
+        widgets = {
+            'payment': forms.RadioSelect(choices=[(1,'Карта Приват'),(2,'Наложенным платежом')])}
+
+
 
 class TheoryForm(forms.ModelForm):
     class Meta:

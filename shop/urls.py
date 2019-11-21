@@ -21,6 +21,7 @@ urlpatterns = [
     url(r'^category/(?P<nn>[0-9]+)/adelete/$', views.category_adelete, name='category_adelete'),
     url(r'^basket$', views.basket, name='basket'),
     url(r'^basket/(?P<nn>[0-9]+)/delete/$', views.basket_delete, name='basket_delete'),
+    url(r'^orders/$', views.orders, name='orders'),
     #url(r'^get.m3u8$', views.get_m3u8, name='get_m3u8'),
     #url(r'^video_feed$', views.video_feed, name='video_feed'),
     #url(r'^streams$', views.streams, name='streams'),

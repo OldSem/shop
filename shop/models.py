@@ -72,8 +72,9 @@ class Order(models.Model):
     city = models.CharField(max_length=50, default=None,null=True)
     street = models.CharField(max_length=50, default=None,null=True)
     build = models.CharField(max_length=15, default=None,null=True)
-    aptmt = models.CharField(max_length=15, default=None,null=True)
-    payment = models.IntegerField( default=None,null=True)
+    aptmt = models.CharField(max_length=15, default=None,null=True,blank=True)
+    payment = models.IntegerField( default=None,null=True,blank=True)
+    status = models.CharField(max_length=50, default=None,null=True)
 
 class Basket(models.Model):
     order = models.ForeignKey(Order,on_delete=models.CASCADE)

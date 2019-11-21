@@ -1,0 +1,40 @@
+{% extends 'shop/base.html' %}
+{% load shop_extras %}
+{% load mathfilters %}
+
+{% block content %}
+      
+       {% for order in orders %}
+
+         <div class="odm">
+            {{order.user}},{{order.city}},{{order.street}},{{order.build}},{{order.aptmt}},{{order.payment}},{{order.status}}
+           <hr>
+            
+         </div>  
+         {% endfor %}
+         <h2>
+          {%if orders|length > 0 %}
+         
+          
+           {%else %}
+           У Вас нет заказов.
+           {%endif%}
+
+            </h2>
+       
+ 
+{% endblock %}
+
+{% block lewa %}
+  <div class="menubok">
+ 
+    
+    {%if goods|length > 0 %}
+
+      <form novalidate>
+        {{form.as_p}}
+        <button type="submit" class="save btn btn-default">Оформить заказ</button>
+      </form>
+    {%endif%}
+  </div>
+{% endblock %}
