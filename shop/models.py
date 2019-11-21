@@ -74,6 +74,7 @@ class Order(models.Model):
     build = models.CharField(max_length=15, default=None,null=True)
     aptmt = models.CharField(max_length=15, default=None,null=True,blank=True)
     payment = models.IntegerField( default=None,null=True,blank=True)
+    total = models.FloatField(blank=True,null=True,)
     status = models.CharField(max_length=50, default=None,null=True)
 
 class Basket(models.Model):

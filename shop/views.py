@@ -154,20 +154,23 @@ def contacts(request):
 def basket(request):
 
     if request.method == 'POST':
-        del request.session['order']
-        request.session.modified = True
-        form=OrderForm(request.POST)
+        order = get_object_or_404(Order, pk=request.session['order'])
+        form=OrderForm(request.POST,instance=order)
         if form.is_valid():
             order = form.save(commit=False)
             order.status = 'ordered'
+            order.total = Basket.objects.filter(order__pk=request.session['order']).aggregate(total=Sum(F('quantity')*F('good__price'), output_field=FloatField()))['total']
             order.save()
+            del request.session['order']
+            request.session.modified = True
             return redirect('goods')
 
     if 'order' in request.session.keys():
         order = get_object_or_404(Order, pk=request.session['order'])
         goods = Basket.objects.filter(order__pk=request.session['order'])
-        form = OrderForm()
+        form = OrderForm(instance=order)
     else:
+        form = []
         goods = []
 
     return render(request, 'shop/basket.html', {'goods': goods,'form':form})
