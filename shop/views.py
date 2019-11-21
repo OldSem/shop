@@ -152,7 +152,11 @@ def contacts(request):
     return render(request,'shop/contacts.html')
 
 def basket(request):
-    goods = Basket.objects.filter(order__pk=request.session['order'])
+    print(request.session.keys())
+    if 'order' in request.session.keys():
+        goods = Basket.objects.filter(order__pk=request.session['order'])
+    else:
+        goods = []
 
     return render(request, 'shop/basket.html', {'goods': goods})
 

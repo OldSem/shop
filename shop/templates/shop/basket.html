@@ -33,10 +33,14 @@
          </div>  
          {% endfor %}
          <h2>
+          {%if goods|length > 0 %}
          Всего  {{goods|total}} грн.
-          </h2>
+          
+           {%else %}
+           Ваша корзина пуста.
+           {%endif%}
 
-
+            </h2>
        
  
 {% endblock %}
