@@ -6,6 +6,8 @@ from django.http import HttpResponseRedirect
 from .forms import ImageForm, GoodForm,CategoryForm,QuantityForm,PostForm,TheoryForm
 from .models import Image,Category,Good,Post,Theory,Order,Basket
 from django.template import Context, Template
+from django.db.models import Sum,F,FloatField
+from django import template
 
 
 
@@ -154,7 +156,10 @@ def basket(request):
 
     return render(request, 'shop/basket.html', {'goods': goods})
 
-
+def basket_delete(request,nn):
+    good = get_object_or_404(Basket, pk=nn)
+    good.delete()
+    return redirect('basket')
 
 
 
@@ -245,3 +250,8 @@ def post_delete(request, nn):
     post = get_object_or_404(Post, pk=nn)
     post.delete()
     return redirect('posts')
+
+
+
+
+

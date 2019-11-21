@@ -1,24 +1,40 @@
 {% extends 'shop/base.html' %}
+{% load shop_extras %}
+{% load mathfilters %}
 
 {% block content %}
-       {%{{sum}} = 0%}
+      
        {% for good in goods %}
+
          <div class="odm">
-            {% with good.good.images.all|first as img %}
-            <img src="{{ img.image.url }}" width="50" height="50" >
-           {% endwith %}
-            
-            {{good.good.title}} 
-            {{good.good.price}} грн.
-            {{good.quantity}} шт.
-            {%{{sum}} = {{sum}}+{{good.good.price}}*{{good.quantity}}%}
-          
-           <a class="btn btn-default" href="{% url 'good_delete' nn=good.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+           <table style="margin-left:10px;" width="100%">
+            <tr> 
+                <td align ="left" width= "10%">   
+                {% with good.good.images.all|first as img %}
+                <img src="{{ img.image.url }}" width="50" height="50" >
+               {% endwith %}
+                </td>
+                <td> 
+                <table> 
+                {{good.good.title}} <br> 
+                <h4>  
+                {{good.quantity}} шт. + 
+                {{good.good.price}} грн. = {{good.quantity|mul:good.good.price}} грн.
+                 </h4> 
+               
+               </table> 
+               </td>
+               <td align ="left" width= "10%"> 
+                <a class="btn btn-default" href="{% url 'basket_delete' nn=good.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+               </td>
+              </tr>
+            </table>
            <hr>
          </div>  
          {% endfor %}
-         Всего  {{sum}}
-
+         <h2>
+         Всего  {{goods|total}} грн.
+          </h2>
 
 
        
