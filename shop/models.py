@@ -47,7 +47,7 @@ class Good(models.Model):
     price = models.FloatField(blank=True,null=True,)
     description = models.TextField(blank=True,null=True,)
     category = models.ForeignKey(Category,blank=True,null=True,on_delete=models.CASCADE)
-    user = models.ManyToManyField(User,related_name = 'owner',null=True)
+    user = models.ForeignKey(User,related_name = 'owner',null=True,on_delete=models.CASCADE)
     def __str__(self):
         if self.title!=None:
             return self.title
@@ -67,6 +67,7 @@ class Image (models.Model):
 
 
 class Order(models.Model):
+    owner = models.ForeignKey(User,null=True,on_delete=models.CASCADE)
     user = models.CharField(max_length=50, default=None,null=True)
     phone = models.CharField(max_length=15, default=None,null=True)
     city = models.CharField(max_length=50, default=None,null=True)

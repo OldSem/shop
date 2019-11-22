@@ -102,8 +102,6 @@ def goods(request):
             request.session['order']=order.pk
 
         basket = Basket()
-        print(request.POST.get('good'))
-        print(request.session.get('order'))
         basket.good = Good.objects.get(pk=request.POST.get('good'))
         basket.order = Order.objects.get(pk=request.session['order'])
         basket.quantity = request.POST.get('quantity')
