@@ -8,6 +8,7 @@ from .models import Image,Category,Good,Post,Theory,Order,Basket
 from django.template import Context, Template
 from django.db.models import Sum,F,FloatField
 from django import template
+from django.core.mail import send_mail
 
 
 
@@ -114,6 +115,7 @@ def goods(request):
     #images = Image.objects.all()
     categories=Category.objects.filter(parent=None)
     categories = Template(tree(request,categories, '', 'goods')).render(Context())
+
 
 
 
