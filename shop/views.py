@@ -65,7 +65,7 @@ def good(request):
     good.save()
     user = request.user
     print(user.id)
-    good.user.add(user)
+    good.user=user
     good.save()
     #good.save_m2m()
     return redirect('good_edit',nn=good.pk)
@@ -83,7 +83,7 @@ def good_edit(request, nn):
         if goodform.is_valid():
             good = goodform.save(commit=False)
             good.save()
-            return redirect('goods')
+            return redirect('good_edit',nn=good.pk)
 
     else:
         goodform = GoodForm(instance=good)
@@ -110,16 +110,13 @@ def goods(request):
 
 
     cat = request.GET.get('cat')
+    if cat=='':
+        cat=None
     form = QuantityForm(initial={'quantity':1})
     goods = Good.objects.filter(category__slug=cat)
     #images = Image.objects.all()
     categories=Category.objects.filter(parent=None)
     categories = Template(tree(request,categories, '', 'goods')).render(Context())
-
-
-
-
-
     return render(request, 'shop/goods.html', {'goods': goods,'categories':categories,'form':form})
 
 

@@ -135,6 +135,7 @@
      <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>   
    {% else %}
      <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>   
+     <li><a href="{% url 'signup'%}?next={{request.path}}">SignUp</a></li>
    {% endif %} 
 {% endblock %}
 <div id="szuk0"><form name="fszuk0" action="http://www.in-vitro.pl/oferta.php" method="post"> <input type="text" name="coszuk" size="50" length="60" value="" tabindex="1" checked="checked"><input class="klawszuk" type="submit" tabindex="1" name="szukpl" value="поиск">  </form></div></div>

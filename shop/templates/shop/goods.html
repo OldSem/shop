@@ -1,4 +1,5 @@
 {% extends 'shop/base.html' %}
+{% load thumbnail %}
 
 {% block content %}
        {% for good in goods %}
@@ -7,14 +8,18 @@
             <tr >
              <td align ="left" width= "10%">
            {% with good.images.all|first as img %}
-            <img class="goodimage" src="{{ img.image.url }}" width="100" height="100" >
+
+           {% thumbnail img.image "100x100" crop="center" as im %}
+
+            <img class="goodimage" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" onmouseover="this.src='{{ img.image.url }}';" onmouseout="this.src='{{ im.url }}';">
+            {% endthumbnail %}
            {% endwith %}
            </td>
            <td align ="left">
             <table width= "90%">
                <tr>
                <td>                
-                    <strong>{{ good.title }}</strong>  
+                    <h3>{{ good.title }}</h3>  
                  </td>  
                 </tr>              
                 <tr>
@@ -24,7 +29,7 @@
                 </tr>
                <tr>
                <td>
-                
+                {{good.user}}
                {{ good.price }} грн.
                </td>
                 </tr>
@@ -40,9 +45,9 @@
                 </form>
             </div>
             <br>
-            
-           {% if user.is_authenticated and user in good.user.all%}<a class="btn btn-default" href="{% url 'good_edit' nn=good.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>{% endif %} 
-           {% if user.is_authenticated and user in good.user.all%}<a class="btn btn-default" href="{% url 'good_delete' nn=good.pk %}"><span class="glyphicon glyphicon-remove"></span></a>{% endif %} 
+            {{user}}
+           {% if user == good.user%}<a class="btn btn-default" href="{% url 'good_edit' nn=good.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>{% endif %} 
+           {% if user == good.user or good.user == None%}<a class="btn btn-default" href="{% url 'good_delete' nn=good.pk %}"><span class="glyphicon glyphicon-remove"></span></a>{% endif %} 
 
            <hr>
          </div>  

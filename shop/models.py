@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.utils.text import slugify
 from unidecode import unidecode
 from django.contrib.auth.models import Group
+from sorl.thumbnail import ImageField
 
 class Category(models.Model):
     name = models.CharField(max_length=200)
@@ -62,7 +63,7 @@ def get_image_filename(instance, filename):
 
 class Image (models.Model):
     good = models.ForeignKey(Good, default=None,on_delete=models.CASCADE,null=True,blank=True,related_name='images')
-    image = models.ImageField(upload_to='shop/%Y/%m/%d',
+    image = ImageField(upload_to='shop/%Y/%m/%d',
                               verbose_name='Image')
 
 
