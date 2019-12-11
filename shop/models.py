@@ -7,19 +7,12 @@ from sorl.thumbnail import ImageField
 
 
 class Category(models.Model):
-
     name = models.CharField(max_length=200)
     slug = models.SlugField()
     parent = models.ForeignKey('self', blank=True, null=True,
         related_name='children', on_delete=models.PROTECT)
 
     class Meta:
-        # enforcing that there can not be two categories under a parent with same slug
-
-        # __str__ method elaborated later in post.  use __unicode__ in place of
-
-        # __str__ if you are using python 2
-
         unique_together = ('slug', 'parent',)
         verbose_name_plural = "categories"
 
@@ -44,7 +37,6 @@ class Category(models.Model):
 
 
 class Good(models.Model):
-
     title = models.CharField(max_length=200, blank=True, null=True)
     price = models.FloatField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
@@ -67,7 +59,6 @@ def get_image_filename(instance, filename):
 
 
 class Image (models.Model):
-
     good = models.ForeignKey(Good, default=None, on_delete=models.CASCADE,
                              null=True, blank=True, related_name='images')
     image = ImageField(upload_to='shop/%Y/%m/%d',
@@ -75,7 +66,6 @@ class Image (models.Model):
 
 
 class Order(models.Model):
-
     owner = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     user = models.CharField(max_length=50, default=None, null=True)
     phone = models.CharField(max_length=15, default=None, null=True)
@@ -90,14 +80,12 @@ class Order(models.Model):
 
 
 class Basket(models.Model):
-
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     good = models.ForeignKey(Good, on_delete=models.CASCADE)
     quantity = models.IntegerField()
 
 
 class Theory(models.Model):
-
     name = models.CharField(max_length=200)
     slug = models.SlugField()
     parent = models.ForeignKey('self', blank=True, null=True,
@@ -105,12 +93,6 @@ class Theory(models.Model):
     text = models.TextField()
 
     class Meta:
-        # enforcing that there can not be two categories under a parent with same slug
-
-        # __str__ method elaborated later in post.  use __unicode__ in place of
-
-        # __str__ if you are using python 2
-
         unique_together = ('slug', 'parent')
         verbose_name_plural = "theory"
 

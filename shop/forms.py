@@ -3,12 +3,10 @@ from .models import Good, Image,Category,Post,Theory,Order
 
 
 class GoodForm(forms.ModelForm):
-
     title = forms.CharField(max_length=128)
     description = forms.CharField(widget=forms.Textarea)
 
     class Meta:
-
         model = Good
         fields = ('title', 'description', 'category', 'price')
         labels = {'title': 'Название',
@@ -19,11 +17,9 @@ class GoodForm(forms.ModelForm):
 
 
 class ImageForm(forms.ModelForm):
-
     image = forms.ImageField(label='Image')
 
     class Meta:
-
         model = Image
         fields = ('image', 'good' )
 
@@ -31,7 +27,6 @@ class ImageForm(forms.ModelForm):
 class CategoryForm(forms.ModelForm):
 
     class Meta:
-
         model = Category
         fields = ('name', 'parent',)
         labels = {'name': 'Название',
@@ -41,14 +36,12 @@ class CategoryForm(forms.ModelForm):
 
 
 class QuantityForm(forms.Form):
-
     quantity = forms.IntegerField()
 
 
 class OrderForm(forms.ModelForm):
 
     class Meta:
-
         model = Order
         fields = ('user', 'phone', 'city', 'street', 'build', 'aptmt',
                   'payment')
@@ -68,7 +61,6 @@ class OrderForm(forms.ModelForm):
 class TheoryForm(forms.ModelForm):
 
     class Meta:
-
         model = Theory
         fields = ('name', 'parent', 'text')
         labels = {'name': 'Тема',
@@ -79,11 +71,9 @@ class TheoryForm(forms.ModelForm):
 
 
 class PostForm(forms.ModelForm):
-
     user = forms.CharField(label='Автор')
 
     class Meta:
-
         model = Post
         fields = ('post', 'user')
         labels = {'post': 'ИМХО'}
