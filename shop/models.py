@@ -5,11 +5,17 @@ from unidecode import unidecode
 from django.contrib.auth.models import Group
 from sorl.thumbnail import ImageField
 
+
 class Category(models.Model):
+
 
     name = models.CharField(max_length=200)
     slug = models.SlugField()
-    parent = models.ForeignKey('self', blank=True, null=True, related_name='children',on_delete=models.PROTECT)
+    parent = models.ForeignKey('self',
+                               blank=True,
+                               null=True,
+                               related_name='children',
+                               on_delete=models.PROTECT)
 
     class Meta:
         # enforcing that there can not be two categories under a parent with same slug
@@ -20,8 +26,6 @@ class Category(models.Model):
 
         unique_together = ('slug', 'parent',)
         verbose_name_plural = "categories"
-
-
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -44,12 +48,14 @@ class Category(models.Model):
 
 
 class Good(models.Model):
-    title = models.CharField(max_length=200,blank=True,null=True,)
 
+
+    title = models.CharField(max_length=200,blank=True,null=True,)
     price = models.FloatField(blank=True,null=True,)
     description = models.TextField(blank=True,null=True,)
     category = models.ForeignKey(Category,blank=True,null=True,on_delete=models.CASCADE)
     user = models.ForeignKey(User,related_name = 'owner',null=True,on_delete=models.CASCADE)
+    
     def __str__(self):
         if self.title!=None:
             return self.title

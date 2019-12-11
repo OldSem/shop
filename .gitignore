@@ -2,6 +2,8 @@
 *~
 __pycache__
 .DS_Store
+/shop/static/*
+/shop/media/*
 /invitro/settings.py
 /invitro/wsgi.py
 invitro_nginx.conf
