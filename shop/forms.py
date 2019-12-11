@@ -61,8 +61,8 @@ class OrderForm(forms.ModelForm):
                   'payment': 'Оплата'}
         values = {"save": 'Оформить заказ'}
         widgets = {
-            'payment': forms.RadioSelect(choices=[(1,'Карта Приват'),
-                                        (2,'Наложенным платежом')])}
+            'payment': forms.RadioSelect(choices=[(1, 'Карта Приват'),
+                                        (2, 'Наложенным платежом')])}
 
 
 class TheoryForm(forms.ModelForm):
@@ -70,14 +70,21 @@ class TheoryForm(forms.ModelForm):
     class Meta:
 
         model = Theory
-        fields = ('name','parent','text')
-        labels = {'name': 'Тема','parent': 'Надтема','text':'Тело',}
+        fields = ('name', 'parent', 'text')
+        labels = {'name': 'Тема',
+                  'parent': 'Надтема',
+                  'text':'Тело',
+                  }
         values = {"save": 'Сохранить'}
 
+
 class PostForm(forms.ModelForm):
+
     user = forms.CharField(label='Автор')
+
     class Meta:
+
         model = Post
-        fields = ('post','user')
+        fields = ('post', 'user')
         labels = {'post': 'ИМХО'}
         values = {"save": 'Добавить'}
