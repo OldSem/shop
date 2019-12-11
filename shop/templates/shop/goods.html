@@ -8,9 +8,9 @@
             <tr >
              <td align ="left" width= "10%">
            {% with good.images.all|first as img %}
-
+            
            {% thumbnail img.image "100x100" crop="center" as im %}
-
+           
             <img class="goodimage" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" onmouseover="this.src='{{ img.image.url }}';" onmouseout="this.src='{{ im.url }}';">
             {% endthumbnail %}
            {% endwith %}
@@ -29,7 +29,7 @@
                 </tr>
                <tr>
                <td>
-                {{good.user}}
+                
                {{ good.price }} грн.
                </td>
                 </tr>
@@ -45,7 +45,7 @@
                 </form>
             </div>
             <br>
-            {{user}}
+        
            {% if user == good.user%}<a class="btn btn-default" href="{% url 'good_edit' nn=good.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>{% endif %} 
            {% if user == good.user or good.user == None%}<a class="btn btn-default" href="{% url 'good_delete' nn=good.pk %}"><span class="glyphicon glyphicon-remove"></span></a>{% endif %} 
 

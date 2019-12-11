@@ -64,7 +64,6 @@ def good(request):
     good=Good()
     good.save()
     user = request.user
-    print(user.id)
     good.user=user
     good.save()
     #good.save_m2m()

@@ -6,6 +6,7 @@ from django.contrib.auth.models import Group
 from sorl.thumbnail import ImageField
 
 class Category(models.Model):
+
     name = models.CharField(max_length=200)
     slug = models.SlugField()
     parent = models.ForeignKey('self', blank=True, null=True, related_name='children',on_delete=models.PROTECT)
