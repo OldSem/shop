@@ -1,20 +1,23 @@
+{% extends 'shop/base.html' %}
 {% load i18n %}
 
 <!-- Posts  -->
+{% block content %}
 <div class="ttitle">{{ topic.title }}</div>
 <div id="list">
 
-    {% for post in posts.object_list %}
+    {% for post in posts %}
         <div class="post">
             <span class="title">{{ post.title }}</span><br />
             by {{ post.creator }} | <span class="date">{{ post.created }}</span> <br /><br />
             {{ post.body }} <br />
+            <hr>
         </div>
     {% endfor %}
 </div>
 
 <!-- Next/Prev page links  -->
-{% if posts.object_list and posts.paginator.num_pages > 1 %}
+{% if posts and posts.paginator.num_pages > 1 %}
 <div class="pagination">
     <span class="step-links">
         {% if posts.has_previous %}
@@ -31,4 +34,5 @@
     </span>
 </div>
 {% endif %}
-<a class="button" href="{% url 'reply' forum.slug topic.pk %}">{% trans 'Reply' %}</a>
+<a class="button" href="{% url 'reply' forum.slug topic.pk %}">{% trans 'Ответить' %}</a>
+{% endblock %}

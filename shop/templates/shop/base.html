@@ -107,7 +107,7 @@
           <a class="{% if request.resolver_match.url_name == 'contacts' %} aktyw {% endif %}" href="{% url 'contacts' %}" tabindex="5">Контакты</a>
         </li>
         <li>
-          <a class="{% if request.resolver_match.url_name == 'posts' %} aktyw {% endif %}" href="{% url 'posts' %}" tabindex="6">Форум</a>
+          <a class="{% if request.resolver_match.url_name == 'forum' %} aktyw {% endif %}" href="{% url 'forum-index' %}" tabindex="6">Форум</a>
         </li>
         <li>
           <a class="{% if request.resolver_match.url_name == 'basket' %} aktyw {% endif %}" href="{% url 'basket' %}" tabindex="7">Корзина</a>

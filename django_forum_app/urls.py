@@ -1,6 +1,8 @@
 from django.conf.urls import url
 from django_forum_app import views
 
+#app_name = 'forum'
+
 urlpatterns = [
     url(r'^$', views.index, name='forum-index'),
     url(r'^(?P<slug>[-\w]+)/$', views.forum, name='forum-detail'),

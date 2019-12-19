@@ -1,7 +1,9 @@
+{% extends 'shop/base.html' %}
 {% load i18n %}
 {% load forum_tags %}
 
 <!-- Forums  -->
+{% block content %}
 <div id="list">
     {% for cat in categories %}
     <h2>{{cat.title}}</h2>
@@ -17,7 +19,7 @@
         {% for forum in cat.get_forums %}
             <tr>
                 <td {% if forloop.last %}class="last"{% endif %}>
-                    <div class="title"> <a href="{% url 'forum-detail' forum.pk %}">{{ forum.title }}</a></div>
+                    <div class="title"> <a href="{% url 'forum-detail' forum.slug %}">{{ forum.title }}</a></div>
                 </td>
                 <td {% if forloop.last %}class="last"{% endif %}>{{ forum.num_posts }}</td>
                 <td {% if forloop.last %}class="last"{% endif %}>
@@ -33,3 +35,4 @@
     </table>
     {% endfor %}
 </div>
+{% endblock %}

@@ -1,7 +1,9 @@
+{% extends 'shop/base.html' %}
 {% load i18n %}
 
 <!-- Threads  -->
-<a id="new_topic" class="button" href="{% url 'new-topic' forum.slug %}">{% trans 'Start New Topic' %}</a>
+{% block content %}
+<a id="new_topic" class="button" href="{% url 'new-topic' forum.slug %}">{% trans 'Новая Тема' %}</a>
 <br />
 <br />
 
@@ -14,8 +16,9 @@
         <td></td>
     </tr>
 
-    {% for topic in topics.object_list %}
+    {% for topic in topics %}
     <tr>
+        
         <td {% if forloop.last %}class="last"{% endif %}>
         <div class="title"> <a href="{% url 'topic-detail' forum.slug topic.pk %}">{{ topic.title }}</a>
             </div></td>
@@ -26,7 +29,7 @@
             <a class="button" href="{% url 'topic-detail' forum.slug topic.pk %}">{% trans 'VIEW' %}</a>
         </td>
     </tr>
-
+   
     {% endfor %}
 </table>
 </div>
@@ -49,3 +52,4 @@
     </span>
 </div>
 {% endif %}
+{% endblock %}

@@ -54,8 +54,8 @@
          {% endfor %}
          {% if user.is_authenticated %} 
          <form>
-            {% with 'good'  as good %}
-            <input type="button" value="Добавить" onClick='location.href={%url good%}'>
+            {% with 'good_new'  as good %}
+            <input type="button" value="Добавить" onClick='location.href={% url good %}'>
 
             {% endwith %}
          </form>

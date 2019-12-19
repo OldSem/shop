@@ -53,7 +53,7 @@ def goodold(request):
 
 
 @login_required
-def good(request):
+def good_new(request):
     good=Good()
     good.save()
     user = request.user
@@ -80,7 +80,8 @@ def good_edit(request, nn):
             return redirect('good_edit',nn=good.pk)
     else:
         goodform = GoodForm(instance=good)
-    return render(request, 'core/model_form_upload.html', {'form': goodform,'images':images,'nn':nn})
+    return render(request, 'core/model_form_upload.html',
+                  {'form': goodform, 'images': images, 'nn': nn})
 
 
 def goods(request):
@@ -100,6 +101,7 @@ def goods(request):
         cat=None
     form = QuantityForm(initial={'quantity': 1})
     goods = Good.objects.filter(category__slug=cat)
+
     #images = Image.objects.all()
     categories=Category.objects.filter(parent=None)
     categories = Template(tree(request, categories, '',

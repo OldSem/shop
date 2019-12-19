@@ -76,6 +76,7 @@ def post_reply(request, slug, topic_id):
     default_data = {'title': form_title}
     form = PostForm(initial=default_data)
 
+
     if request.method == 'POST':
         quote = request.POST.get('quote', '')
         form = PostForm(request.POST)
@@ -85,6 +86,7 @@ def post_reply(request, slug, topic_id):
             post = Post()
             post.topic = topic
             post.title = form.cleaned_data['title']
+
             post.body = quote + form.cleaned_data['body']
             post.creator = request.user
             post.user_ip = request.META['REMOTE_ADDR']
