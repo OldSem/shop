@@ -13,7 +13,7 @@ def signup(request):
                        
             username = form.cleaned_data.get('username')
             user = User.objects.get(username=username)
-            user.is_active=False     
+            user.is_active=True     
             user.save()
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=user.username, password=user.password)
