@@ -4,6 +4,47 @@ from django.utils.text import slugify
 from unidecode import unidecode
 from django.contrib.auth.models import Group
 from sorl.thumbnail import ImageField
+from mptt.models import MPTTModel, TreeForeignKey
+
+
+
+class GalCat(MPTTModel):
+    name = models.CharField(max_length=50, unique=True)
+    slug = models.SlugField()
+    parent = TreeForeignKey('self', null=True, blank=True,
+        related_name='children', db_index=True, on_delete=models.CASCADE)
+
+    class MPTTMeta:
+        order_insertion_by = ['name']
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            slug = slugify(unidecode(self.name))
+            while True:
+                if Category.objects.filter(slug=slug).count() > 0:
+                    slug = slug + '-'
+                else:
+                    self.slug = slug
+                    break
+        super(GalCat, self).save(*args, **kwargs)
+
+    def __str__(self):
+        full_path = [self.name]
+        k = self.parent
+        while k is not None:
+            full_path.append(k.name)
+            k = k.parent
+        return ' -> '.join(full_path[::-1])
+
+
+class Gallery(models.Model):
+    category = models.ForeignKey(GalCat, default=None, on_delete=models.CASCADE,
+                             null=True, blank=True, related_name='images')
+    image = ImageField(upload_to='shop/%Y/%m/%d',
+                              verbose_name='Image')
+    description = models.CharField(max_length=200)
+
+
 
 
 class Category(models.Model):

@@ -4,8 +4,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from .forms import ImageForm, GoodForm, CategoryForm, QuantityForm, PostForm,\
-    TheoryForm, OrderForm
-from .models import Image, Category, Good, Post, Theory, Order, Basket
+    TheoryForm, OrderForm, GalleryForm, GalCatForm
+from .models import Image, Category, Good, Post, Theory, Order, Basket,\
+    GalCat, Gallery
 from django.template import Context, Template
 from django.db.models import Sum,F,FloatField
 from django import template
@@ -251,6 +252,66 @@ def post_delete(request, nn):
     return redirect('posts')
 
 
+def galcategory(request):
+    if request.method == "POST":
+        form = GalCatForm(request.POST)
+        if form.is_valid():
+            cat = form.save(commit=False)
+            cat.save()
+            form.save_m2m()
+            return redirect('gallery')
+    else:
+        form = GalCatForm()
+    return render(request, 'core/category.html', {'form': form})
+
+def gallery(request):
+    #request.session.flush()
+    cat = request.GET.get('cat')
+    if cat=='':
+        cat=None
+    gallery = Gallery.objects.filter(category__slug=cat)
+
+    #images = Image.objects.all()
+    categories=Category.objects.filter(parent=None)
+
+    return render(request, 'shop/gallery.html',
+                   {'gallery': gallery,
+                    'nodes':GalCat.objects.all()})
 
 
+def gallery_new(request):
+    slug = request.GET.get('cat')
+    if request.method == 'POST':
+        form = GalleryForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('/gallery/?cat=' + slug)
+    else:
+        form = GalleryForm()
+        if slug is not '':
+            form.fields["category"].initial = GalCat.objects.get(slug=slug)
+    return render(request, 'core/theoryform.html', {
+        'form': form
+    })
+
+
+def gallery_edit(request, nn):
+    theme = get_object_or_404(Gallery, pk=nn)
+    if request.method == "POST":
+        form = GalleryForm(request.POST, request.FILES, instance=theme)
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.save()
+            category = theme.category.slug if theme.category is not None else ''
+            return redirect('/gallery/?cat=' + category)
+    else:
+        form = GalleryForm(instance=theme)
+    return render(request, 'core/theoryform.html', {'form': form})
+
+
+def gallery_delete(request, nn):
+    theme = get_object_or_404(Gallery, pk=nn)
+    category = theme.category.slug if theme.category is not None else ''
+    theme.delete()
+    return redirect('/gallery/?cat=' + category)
 

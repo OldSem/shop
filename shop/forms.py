@@ -1,5 +1,6 @@
 from django import forms
-from .models import Good, Image,Category,Post,Theory,Order
+from .models import Good, Image, Category, Post, Theory, Order,\
+    GalCat, Gallery
 
 
 class GoodForm(forms.ModelForm):
@@ -14,6 +15,25 @@ class GoodForm(forms.ModelForm):
                   'category': 'Категория',
                   'price': 'Цена',
                   }
+
+
+class GalleryForm(forms.ModelForm):
+    image = forms.ImageField(label='Image')
+
+    class Meta:
+        model = Gallery
+        fields = ('image', 'category', 'description' )
+
+
+class GalCatForm(forms.ModelForm):
+
+    class Meta:
+        model = GalCat
+        fields = ('name', 'parent',)
+        labels = {'name': 'Название',
+                  'parent': 'Надкатегория',
+                  }
+        values = {"save": 'Добавить'}
 
 
 class ImageForm(forms.ModelForm):

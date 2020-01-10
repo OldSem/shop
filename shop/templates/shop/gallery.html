@@ -1,0 +1,91 @@
+{% extends 'shop/base.html' %}
+{% load thumbnail %}
+
+{% block content %}
+       {% for item in gallery %}
+         <div class="odm">
+           <table style="margin-left:10px;" width="100%">
+            <tr >
+             <td align ="left" width= "10%">
+           
+            
+           {% thumbnail item.image "100x100" crop="center" as im %}
+           
+            <img class="goodimage" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" onmouseover="this.src='{{ item.image.url }}';" onmouseout="this.src='{{ im.url }}';">
+            {% endthumbnail %}
+            
+           
+           </td>
+          </tr>
+          <tr><td>
+            {{item.description}}
+          </td></tr>
+
+          </table>  
+            <br>
+        
+             {%for group in user.groups.all%}
+              {%if group.name == 'admin'%}
+                        
+                
+                <a class="btn btn-default" href="{% url 'gallery_edit' nn=item.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+                <a class="btn btn-default" href="{% url 'gallery_delete' nn=item.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+                {%endif%}
+                    
+                
+            {%endfor%}
+
+
+           <hr>
+         </div>  
+         {% endfor %}
+            {%for group in user.groups.all%}
+              {%if group.name == 'admin'%}
+                        
+                
+                    <a class="btn btn-default" href="{% url 'gallery_new' %}?cat={{request.GET.cat}}"><span class="glyphicon glyphicon-plus"></span></a>
+                {%endif%}
+                    
+                
+            {%endfor%}
+
+
+       
+ 
+{% endblock %}
+
+{% block lewa %}
+{% load mptt_tags %}
+  <div class="menubok">
+  <ul>
+    {% recursetree nodes %}
+        <li>
+            <a href="{% url  'gallery' %}?cat={{ node.slug }}" > {{ node.name }}</a>
+           
+            {% if not node.is_leaf_node %}
+                <ul class="children">
+                    {{ children }}
+                </ul>
+            {% endif %}
+        </li>
+    {% endrecursetree %}
+    <li>
+
+           
+            {%for group in user.groups.all%}
+                {%if group.name == 'admin'%}
+                    
+            
+                    <a class="btn btn-default" href="{% url 'galcategory' %}"><span class="glyphicon glyphicon-plus"></span></a>
+                
+                {%endif%}
+            {%endfor%}
+                
+            
+           
+            
+        </li>
+  </ul>
+
+  </div>
+{% endblock %}

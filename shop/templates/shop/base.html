@@ -100,21 +100,24 @@
         </li>
         <li>
      
-          <a class="{% if request.resolver_match.url_name == 'theory' %} aktyw {% endif %}"  href="{% url 'theory' %}?cat=" tabindex="4">Теория</a>
-        </li>
-
-        <li>
-          <a class="{% if request.resolver_match.url_name == 'contacts' %} aktyw {% endif %}" href="{% url 'contacts' %}" tabindex="5">Контакты</a>
+          <a class="{% if request.resolver_match.url_name == 'gallery' %} aktyw {% endif %}"  href="{% url 'gallery' %}?cat=" tabindex="4">Галерея</a>
         </li>
         <li>
-          <a class="{% if request.resolver_match.url_name == 'forum' %} aktyw {% endif %}" href="{% url 'forum-index' %}" tabindex="6">Форум</a>
+     
+          <a class="{% if request.resolver_match.url_name == 'theory' %} aktyw {% endif %}"  href="{% url 'theory' %}?cat=" tabindex="5">Теория</a>
         </li>
         <li>
-          <a class="{% if request.resolver_match.url_name == 'basket' %} aktyw {% endif %}" href="{% url 'basket' %}" tabindex="7">Корзина</a>
+          <a class="{% if request.resolver_match.url_name == 'contacts' %} aktyw {% endif %}" href="{% url 'contacts' %}" tabindex="6">Контакты</a>
+        </li>
+        <li>
+          <a class="{% if request.resolver_match.url_name == 'forum' %} aktyw {% endif %}" href="{% url 'forum-index' %}" tabindex="7">Форум</a>
+        </li>
+        <li>
+          <a class="{% if request.resolver_match.url_name == 'basket' %} aktyw {% endif %}" href="{% url 'basket' %}" tabindex="8">Корзина</a>
         </li>
         {% if user.is_authenticated %}
         <li>
-          <a class="{% if request.resolver_match.url_name == 'orders' %} aktyw {% endif %}" href="{% url 'orders' %}" tabindex="7">Заказы</a>
+          <a class="{% if request.resolver_match.url_name == 'orders' %} aktyw {% endif %}" href="{% url 'orders' %}" tabindex="9">Заказы</a>
         </li>
 
         {% endif %}

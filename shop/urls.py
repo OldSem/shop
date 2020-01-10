@@ -30,10 +30,13 @@ urlpatterns = [
     url(r'^basket/(?P<nn>[0-9]+)/delete/$', views.basket_delete,
         name='basket_delete'),
     url(r'^orders/$', views.orders, name='orders'),
-    #url(r'^get.m3u8$', views.get_m3u8, name='get_m3u8'),
-    #url(r'^video_feed$', views.video_feed, name='video_feed'),
-    #url(r'^streams$', views.streams, name='streams'),
-    #url(r'^get_cl$', views.get_cl, name='get_cl'),
-    #url(r'^map$', views.map, name='map'),
+    url(r'^gallery/$', views.gallery, name='gallery'),
+    url(r'^gallery_new/$', views.gallery_new, name='gallery_new'),
+    url(r'^gallery/(?P<nn>[-\w]+)/edit/$', views.gallery_edit,
+        name='gallery_edit'),
+    url(r'^gallery/(?P<nn>[-\w]+)/delete/$', views.gallery_delete,
+        name='gallery_delete'),
+    url(r'^galcategory$', views.galcategory, name='galcategory'),
+
 
     ]
