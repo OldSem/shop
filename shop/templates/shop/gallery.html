@@ -9,9 +9,9 @@
              <td align ="left" width= "10%">
            
             
-           {% thumbnail item.image "100x100" crop="center" as im %}
+           {% thumbnail item.image "100" crop="center" as im %}
            
-            <img class="goodimage" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" onmouseover="this.src='{{ item.image.url }}';" onmouseout="this.src='{{ im.url }}';">
+            <a href="{{ item.image.url }}" target="_blank"><img class="goodimage" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" onmouseover="this.src='{{ item.image.url }}';" onmouseout="this.src='{{ im.url }}';"></a>
             {% endthumbnail %}
             
            
@@ -42,7 +42,7 @@
             {%for group in user.groups.all%}
               {%if group.name == 'admin'%}
                         
-                
+                    
                     <a class="btn btn-default" href="{% url 'gallery_new' %}?cat={{request.GET.cat}}"><span class="glyphicon glyphicon-plus"></span></a>
                 {%endif%}
                     
@@ -75,7 +75,7 @@
             {%for group in user.groups.all%}
                 {%if group.name == 'admin'%}
                     
-            
+                    
                     <a class="btn btn-default" href="{% url 'galcategory' %}"><span class="glyphicon glyphicon-plus"></span></a>
                 
                 {%endif%}
