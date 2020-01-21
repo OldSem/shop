@@ -9,7 +9,7 @@
              <td align ="left" width= "10%">
            {% with good.images.all|first as img %}
             
-           {% thumbnail img.image "100x100" crop="center" as im %}
+           {% thumbnail img.image "100" crop="center" as im %}
            
             <img class="goodimage" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" onmouseover="this.src='{{ img.image.url }}';" onmouseout="this.src='{{ im.url }}';">
             {% endthumbnail %}
