@@ -43,6 +43,7 @@ class Gallery(models.Model):
     image = ImageField(upload_to='shop/%Y/%m/%d',
                               verbose_name='Image')
     description = models.CharField(max_length=200)
+    date = models.DateField(auto_now_add=True)
 
 
 
