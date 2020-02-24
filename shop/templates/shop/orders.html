@@ -8,6 +8,16 @@
 
          <div class="odm">
             {{order.user}},{{order.city}},{{order.street}},{{order.build}},{{order.aptmt}},{{order.payment}},{{order.status}},{{order.total}}
+            {%for group in user.groups.all%}
+              {%if group.name == 'admin'%}
+                        
+                
+                <a class="btn btn-default" href="{% url 'order_edit' nn=order.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+
+                {%endif%}
+                    
+                
+            {%endfor%}
            <hr>
             
          </div>  

@@ -178,6 +178,27 @@ def orders(request):
     return render(request, 'shop/orders.html', {'orders': orders})
 
 
+def order_edit(request,nn):
+    order = get_object_or_404(Order, pk=nn)
+    goods = Basket.objects.filter(order__pk=nn)
+    request.session['order'] = order.pk
+    if request.method == 'POST':
+        form=OrderForm(request.POST, instance=order)
+        if form.is_valid():
+
+            order = form.save(commit=False)
+            order.total = Basket.objects.filter(
+                order__pk=nn
+                ).aggregate(total=Sum(F('quantity') * F('good__price'),
+                output_field=FloatField()))['total']
+            order.save()
+            return redirect('orders')
+    else:
+        form = OrderForm(instance=order)
+
+    return render(request, 'shop/order.html', {'goods': goods,'form': form})
+
+
 def theory(request):
     theme = request.GET.get('cat')
     themes = Theory.objects.filter(parent=None)

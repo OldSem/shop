@@ -109,11 +109,11 @@ class Image (models.Model):
 
 class Order(models.Model):
     owner = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
-    user = models.CharField(max_length=50, default=None, null=True)
-    phone = models.CharField(max_length=15, default=None, null=True)
-    city = models.CharField(max_length=50, default=None, null=True)
-    street = models.CharField(max_length=50, default=None, null=True)
-    build = models.CharField(max_length=15, default=None, null=True)
+    user = models.CharField(max_length=50, default=None, null=True, blank=True)
+    phone = models.CharField(max_length=15, default=None, null=True, blank=True)
+    city = models.CharField(max_length=50, default=None, null=True, blank=True)
+    street = models.CharField(max_length=50, default=None, null=True, blank=True)
+    build = models.CharField(max_length=15, default=None, null=True, blank=True)
     aptmt = models.CharField(max_length=15, default=None, null=True,
                              blank=True)
     payment = models.IntegerField( default=None, null=True, blank=True)

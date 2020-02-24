@@ -37,6 +37,8 @@ urlpatterns = [
     url(r'^gallery/(?P<nn>[-\w]+)/delete/$', views.gallery_delete,
         name='gallery_delete'),
     url(r'^galcategory$', views.galcategory, name='galcategory'),
+    url(r'^order/(?P<nn>[-\w]+)/edit/$', views.order_edit,
+        name='order_edit'),
 
 
     ]
